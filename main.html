@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Григорян Севак — Портфолио</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #071025;
+      --bg-2: #061427;
+      --card:#071826;
+      --muted:#9aa4b2;
+      --accent-1:#6ee7b7;
+      --accent-2:#60a5fa;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --glass-border: rgba(255,255,255,0.06);
+      --maxw:1100px;
+      --radius:14px;
+      --soft-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; padding:36px 18px; display:flex; justify-content:center; background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.06), transparent), radial-gradient(900px 400px at 90% 90%, rgba(110,231,183,0.04), transparent), linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      min-height:100vh;
+    }
+    .wrap{width:100%; max-width:var(--maxw); animation:fadeIn .6s ease both}
+
+    header{
+      display:flex; gap:20px; align-items:center; justify-content:space-between; margin-bottom:26px; position:relative;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{
+      width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#022;box-shadow:var(--soft-shadow);border:1px solid rgba(255,255,255,0.06);
+      transform:translateZ(0);
+    }
+    .brand h1{margin:0;font-size:16px;letter-spacing:0.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex; gap:12px; align-items:center}
+    nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:600; font-size:14px; transition:all .18s ease}
+    nav a:hover{color:white;background:rgba(255,255,255,0.03); transform:translateY(-2px)}
+
+    .nav-toggle{display:none;border:0;background:transparent;color:var(--muted);font-size:22px;padding:8px;border-radius:8px}
+
+    .hero{
+      display:grid; grid-template-columns: 220px 1fr; gap:28px; align-items:center; padding:28px; border-radius:var(--radius); border:1px solid var(--glass-border); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:0 6px 30px rgba(3,8,20,0.5);
+    }
+    .photo{width:190px; height:190px; border-radius:16px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#071826,#04121a); border:1px solid rgba(255,255,255,0.03)}
+    .photo img{width:100%;height:100%;object-fit:cover; display:block}
+    .hero h1{margin:0;font-size:26px}
+    .hero h2{margin:6px 0 12px;color:var(--accent-1);font-weight:700}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
+    .contacts{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+
+    .btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#022; padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(46,161,155,0.12);transition:transform .18s ease, box-shadow .18s ease}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(46,161,155,0.16)}
+    .btn.secondary{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);box-shadow:none}
+
+    main{margin-top:20px; display:grid; gap:18px}
+
+    .card{background:linear-gradient(180deg,var(--card), rgba(7,24,36,0.6)); padding:18px; border-radius:12px; border:1px solid var(--glass-border); transition:transform .18s ease, box-shadow .18s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(2,6,23,0.5)}
+    h3{margin:0 0 8px; display:flex; align-items:center; gap:12px}
+    h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));margin-left:12px;border-radius:2px}
+    .muted{color:var(--muted); font-size:14px}
+
+    /* Skills */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);min-width:160px}
+    .skill .icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;background:rgba(255,255,255,0.02)}
+    .skill .name{font-weight:700}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .project{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+    .project h4{margin:0 0 8px}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+    .tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+
+    /* Experience */
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .exp{display:flex;gap:14px;align-items:flex-start}
+    .exp .meta{min-width:140px;color:var(--muted);font-size:13px}
+    .exp .meta strong{color:#fff}
+    .exp .desc{flex:1}
+    .exp ul{margin:8px 0 0;padding-left:18px}
+    .exp li{margin-bottom:6px}
+
+    /* PDF embed */
+    .pdf-wrap{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+    .pdf-preview{width:50%;max-height:50vh;border-radius:10px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))}
+    .pdf-preview iframe{width:100%;height:100vh;border:0}
+
+    footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px}
+    .socials a{color:var(--muted);text-decoration:none;margin-right:8px}
+
+    /* small screens */
+    @media (max-width:1100px){
+      :root{--maxw:960px}
+      .logo{width:56px;height:56px}
+    }
+    @media (max-width:900px){
+      body{padding:24px 14px}
+      .hero{grid-template-columns: 160px 1fr; gap:18px; padding:18px}
+      .photo{width:150px;height:150px}
+      .hero h1{font-size:22px}
+      .pdf-preview{width:320px}
+    }
+    @media (max-width:720px){
+      .nav-toggle{display:inline-flex}
+      nav{display:none;position:absolute;right:12px;top:74px;background:linear-gradient(180deg,var(--card),rgba(7,24,36,0.95));padding:12px;border-radius:12px;border:1px solid var(--glass-border);flex-direction:column;gap:8px;min-width:220px;box-shadow:0 12px 40px rgba(0,0,0,0.6);z-index:1100}
+      nav.open{display:flex}
+      header{align-items:center}
+      .hero{grid-template-columns:1fr; text-align:center}
+      .photo{margin:0 auto}
+      .contacts{justify-content:center}
+      main{margin-top:14px}
+      .projects{grid-template-columns:1fr}
+      .pdf-preview{width:100%;height:360px}
+      .pdf-wrap{flex-direction:column}
+      .pdf-wrap > div{width:100%}
+      .pdf-wrap p{display:flex;gap:8px;flex-wrap:wrap}
+      .pdf-wrap a.btn{flex:1;min-width:140px}
+      .exp{flex-direction:column;align-items:stretch}
+      .exp .meta{min-width:0;margin-bottom:8px}
+      footer{flex-direction:column;align-items:flex-start}
+    }
+
+    @media (max-width:420px){
+      body{padding:12px 8px}
+      .photo{width:120px;height:120px}
+      .hero h1{font-size:20px}
+      .btn{padding:8px 10px;font-size:13px}
+      .muted{font-size:13px}
+      .pdf-preview{height:320px}
+    }
+
+    /* small animations */
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">SG</div>
+        <div>
+          <div style="font-weight:700">Григорян Севак Арманович</div>
+          <div style="font-size:13px;color:var(--muted)">Junior Python Developer</div>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню">☰</button>
+      <nav id="siteNav">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#projects">Проекты</a>
+        <a href="#experience">Опыт</a>
+        <a href="#reco">Рекомендация</a>
+        <a href="#contacts">Контакты</a>
+        <a class="btn" id="downloadResume">Скачать резюме</a>
+      </nav>
+    </header>
+
+    <section class="hero card" id="hero">
+      <div class="photo" title="Замените файл photo.jpg на вашу фотографию">
+        <!-- Замените src="photo.jpg" на свою фотографию -->
+        <img id="profilePhoto" src="photo.jpg" alt="Фото Севака">
+      </div>
+      <div>
+        <h1>Григорян Севак Арманович</h1>
+        <h2>Junior Python Developer</h2>
+        <p>Открыт к освоению новых технологий и инструментов, активно ищу возможности для профессионального роста и реализации.</p>
+
+        <div class="contacts">
+          <a class="btn" href="mailto:sevak.grigoryan.06@mail.ru">sevak.grigoryan.06@mail.ru</a>
+          <a class="btn" href="https://github.com/GrigoryanSevak" target="_blank">GitHub</a>
+          <a class="btn" href="https://t.me/Sevak_Grigoryan" target="_blank">Telegram</a>
+        </div>
+
+        <p style="margin-top:12px;color:var(--muted);font-size:13px">Санкт-Петербург • Родился 08.09.2006 • Открыт к стажировкам и удалённой работе</p>
+      </div>
+    </section>
+
+    <main>
+      <section id="about" class="card">
+        <h3>Обо мне</h3>
+        <p class="muted">Я студент 4‑го курса направления «Информационные системы и программирование» в СПбПУ (Институт среднего профессионального образования). Имею практический опыт разработки backend‑утилит для пакетной обработки изображений и асинхронных пайплайнов, включая интеграцию с Postgres и контейнеризацию через Docker. Горжусь тем, что умею доводить скрипты до рабочего, сопровождаемого состояния: продуманное логирование, обработка ошибок и надёжные механизмы повторной обработки и синхронизации данных.</p>
+      </section>
+
+      <section id="skills" class="card">
+        <h3>Навыки — Tech stack</h3>
+        <div class="skills" style="margin-top:12px">
+          <div class="skill"><div class="icon">🐍</div><div><div class="name">Python</div><div class="muted">Django, DRF, asyncio</div></div></div>
+          <div class="skill"><div class="icon">🌐</div><div><div class="name">HTML / CSS / JS</div><div class="muted">Frontend basics</div></div></div>
+          <div class="skill"><div class="icon">🐬</div><div><div class="name">Docker</div><div class="muted">Compose, контейнеризация</div></div></div>
+          <div class="skill"><div class="icon">🗄️</div><div><div class="name">Postgres / MySQL / SQLite</div><div class="muted">Проектирование, оптимизация</div></div></div>
+          <div class="skill"><div class="icon">⚙️</div><div><div class="name">Парсинг / Автоматизация</div><div class="muted">aiohttp, requests, BeautifulSoup</div></div></div>
+          <div class="skill"><div class="icon">🧰</div><div><div class="name">Инструменты</div><div class="muted">Pillow, psycopg2, asyncpg, bash</div></div></div>
+        </div>
+      </section>
+
+      <section id="projects" class="card">
+        <h3>Проекты (ключевые)</h3>
+        <div class="projects" style="margin-top:12px">
+
+          <article class="project">
+            <h4>ImageConverter</h4>
+            <p>Утилита / сервис пакетной конвертации изображений (jpg/png → WebP) с поддержкой мультипроцессной обработки и DB‑driven workflow.</p>
+
+            <p class="muted" style="margin-top:8px">Ключевые возможности:</p>
+            <ul class="muted" style="margin:6px 0 0 18px;padding-left:8px">
+              <li>Пакетная конвертация изображений с контролем качества, опциями lossless и удалением метаданных.</li>
+              <li>Автоматическое изменение размера и корректировка ориентации по EXIF; безопасное удаление исходников после успешной обработки.</li>
+              <li>Параллельная обработка и батчинг для высокой пропускной способности, с продуманной обработкой ошибок и повторной попыткой.</li>
+              <li>Режим сверки — проверка состояния файловой системы и синхронизация с данными в базе, чтобы поддерживать консистентность.</li>
+              <li>Интеграция с CMS/БД: сервис может работать в режиме, когда источником задач служат записи в базе, а после обработки — обновляются соответствующие записи.</li>
+            </ul>
+
+            <p class="muted" style="margin-top:8px">Как это работает (вкратце):</p>
+            <p class="muted" style="margin:6px 0 0">Сервис читает список задач (файлы или записи из БД), группирует их в батчи и запускает конвертацию параллельно. Для каждого файла выполняется проверка ориентации и качества, затем создаётся WebP‑версия и при успешной обработке исходник может удаляться. Сервис ведёт логирование статусов и поддерживает режим повторной проверки для восстановления консистентности.</p>
+
+            <p class="muted" style="margin-top:8px">Технологии: Python, обработка изображений, параллельная обработка, контейнеризация, Postgres.</p>
+
+            <p style="margin-top:8px;color:var(--muted)"><strong>Коротко:</strong> пакетный конвертер изображений с DB‑driven workflow, параллельной обработкой и надёжной синхронизацией данных.</p>
+
+          </article>
+
+          <article class="project">
+            <h4>PicSeeker</h4>
+            <p>Асинхронный пайплайн поиска, скачивания и постобработки изображений для товарных карточек — от поиска в источниках до подготовки готовых изображений для загрузки в систему.</p>
+
+            <p class="muted" style="margin-top:8px">Ключевые возможности:</p>
+            <ul class="muted" style="margin:6px 0 0 18px;padding-left:8px">
+              <li>Асинхронный сбор изображений из внешних источников с управлением параллелизмом и устойчивостью к ошибкам сетевого ввода‑вывода.</li>
+              <li>Модульная цепочка постобработки: удаление фона, нанесение или удаление водяных знаков, масштабирование и проверка качества.</li>
+              <li>Автоматическая генерация описаний и метаданных, вычисление хешей для дедупликации и контроля целостности.</li>
+              <li>Подготовка результатов для дальнейшей загрузки в базу — фильтрация, валидация и агрегация.</li>
+            </ul>
+
+            <p class="muted" style="margin-top:8px">Как это работает (вкратце):</p>
+            <p class="muted" style="margin:6px 0 0">Система параллельно ищет и загружает изображения, пропуская результаты через набор обработчиков (качество, фон, водяной знак). После проверки изображения либо помечаются как готовые, либо отбрасываются/помещаются в очередь на повторную обработку. Параллельно формируются текстовые описания и служебная информация для загрузки в основную систему.</p>
+
+            <p class="muted" style="margin-top:8px">Технологии: асинхронная обработка, сетевые запросы, модульная постобработка изображений, контейнеризация.</p>
+
+            <p style="margin-top:8px;color:var(--muted)"><strong>Коротко:</strong> асинхронный image‑pipeline от поиска до финальной подготовки изображений с модулями проверки качества и генерации метаданных.</p>
+
+          </article>
+
+          <article class="project">
+            <h4>Интеграция в products_manager (Django)</h4>
+            <p>Оркестрация и UI‑интеграция сервисов для удобного запуска, мониторинга и просмотра результатов прямо из админки.</p>
+
+            <p class="muted" style="margin-top:8px">Ключевые детали:</p>
+            <ul class="muted" style="margin:6px 0 0 18px;padding-left:8px">
+              <li>Из админки можно запускать режимы поиска и конвертации, передавая параметры запуска и наблюдая за прогрессом.</li>
+              <li>Сохраняется вывод и статус выполнения задач для последующего инспектирования через UI.</li>
+              <li>Предоставлен удобный просмотр результатов — изображения, состояние обработки и логи — для упрощения тестирования и эксплуатационных задач.</li>
+            </ul>
+
+            <p class="muted" style="margin-top:8px">Технологии: веб‑интерфейс для оркестрации, логирование, интеграция с бэкенд‑сервисами и контейнерная среда.</p>
+
+            <p style="margin-top:8px;color:var(--muted)"><strong>Коротко:</strong> реализовал удобную оркестрацию и мониторинг для запуска и контроля пайплайнов прямо из интерфейса.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="experience" class="card">
+        <h3>Опыт работы</h3>
+        <div class="timeline" style="margin-top:12px">
+          <div class="exp">
+            <div class="meta">2024 — 2025<br/><strong>OOO «МИРАЖ»</strong></div>
+            <div class="desc">
+              <p style="margin:0 0 6px"><strong>Backend / Automation Developer</strong> — год работы. Разрабатывал инструменты автоматизации и обработки данных для товарных платформ.</p>
+              <ul class="muted" style="margin:6px 0 0;padding-left:18px">
+                <li>Увеличил скорость обработки изображений на 3× через мультипроцессинг и батчинг.</li>
+                <li>Разработал DB-driven workflow для синхронизации рэндишенов с Postgres (Wagtail).</li>
+                <li>Развертывал сервисы в Docker, писал CI-скрипты для тестирования.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reco" class="card">
+        <h3>Рекомендательное письмо</h3>
+        <div class="pdf-wrap" style="margin-top:12px">
+          <div class="pdf-preview">
+            <!-- Замените recommendation.pdf на ваш файл -->
+            <iframe src="recommendation.pdf"></iframe>
+          </div>
+          <div style="flex:1">
+            <p class="muted">Рекомендательное письмо доступно для просмотра и скачивания ниже — официальный документ, подтверждающий рекомендации и вклад в проекты.</p>
+            <p style="margin-top:8px"><a class="btn" href="recommendation.pdf" download>Скачать письмо (PDF)</a></p>
+          </div>
+        </div>
+      </section>
+
+      
+
+      <section id="contacts" class="card">
+        <h3>Контакты</h3>
+        <p style="margin:8px 0"><strong>Email:</strong> <a href="mailto:sevak.grigoryan.06@mail.ru">sevak.grigoryan.06@mail.ru</a></p>
+        <p style="margin:8px 0"><strong>GitHub:</strong> <a href="https://github.com/GrigoryanSevak" target="_blank">github.com/GrigoryanSevak</a></p>
+        <p style="margin:8px 0"><strong>Telegram:</strong> <a href="https://t.me/Sevak_Grigoryan" target="_blank">@Sevak_Grigoryan</a></p>
+
+        <div style="margin-top:12px" class="muted">Готов оказать помощь в разработке, ревью кода и участии в проектах. Открыт к стажировкам и junior позиции.</div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="muted">© 2025 Григорян Севак — Санкт-Петербург</div>
+      <div class="socials">
+        <a href="https://github.com/GrigoryanSevak" target="_blank">GitHub</a>
+        <a href="https://t.me/Sevak_Grigoryan" target="_blank">Telegram</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Скрипты: плавный скролл и экспорт в PDF (html2pdf) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      // Smooth scroll for anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if(href && href.startsWith('#')){
+            e.preventDefault();
+            const id = href.slice(1);
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            // On small screens, close mobile nav after click
+            const siteNav = document.getElementById('siteNav');
+            if(siteNav && siteNav.classList.contains('open')) siteNav.classList.remove('open');
+          }
+        });
+      });
+
+      // Mobile nav toggle
+      const navToggle = document.getElementById('navToggle');
+      const siteNav = document.getElementById('siteNav');
+      if(navToggle && siteNav){
+        navToggle.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          siteNav.classList.toggle('open');
+          // toggle aria-expanded for accessibility
+          const expanded = siteNav.classList.contains('open');
+          navToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+        // close on outside click
+        document.addEventListener('click', (e)=>{
+          if(window.innerWidth <= 720){
+            if(!siteNav.contains(e.target) && !navToggle.contains(e.target)){
+              siteNav.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+        // close on escape
+        document.addEventListener('keydown', (e)=>{
+          if(e.key === 'Escape'){
+            siteNav.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // Export visible page to PDF (approximate resume) - uses html2pdf
+      const downloadBtn = document.getElementById('downloadResume');
+      if(downloadBtn){
+        downloadBtn.addEventListener('click', ()=>{
+          const opt = {
+            margin:       0.4,
+            filename:     'Sevak_Grigoryan_Resume.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+          };
+          const element = document.querySelector('.wrap');
+          html2pdf().set(opt).from(element).save();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
