@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function(){
-  // Smooth scroll for anchors
+  // Селекторы
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  const header = document.querySelector('header');
+
+  // 1) Smooth scroll для внутренних ссылок (как у тебя был, но компактно)
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', function(e){
       const href = this.getAttribute('href');
@@ -8,25 +13,54 @@ document.addEventListener('DOMContentLoaded', function(){
         const id = href.slice(1);
         const el = document.getElementById(id);
         if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-        // On small screens, close mobile nav after click
-        const siteNav = document.getElementById('siteNav');
         if(siteNav && siteNav.classList.contains('open')) siteNav.classList.remove('open');
       }
     });
   });
 
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const siteNav = document.getElementById('siteNav');
+  // Утилита: подставляем правильный top для мобильной навигации,
+  // чтобы меню не вылазило под/за границы header.
+  function updateNavTop(){
+    if(!siteNav || !header) return;
+    const rect = header.getBoundingClientRect();
+    // rect.bottom — координата относительно окна; добавляем небольшой отступ
+    const topPx = Math.max(8, Math.ceil(rect.bottom + 6));
+    // применяем только на узких экранах, иначе возвращаем штатное поведение
+    if(window.innerWidth <= 768){
+      siteNav.style.position = 'fixed';
+      siteNav.style.top = topPx + 'px';
+      siteNav.style.left = '8px';
+      siteNav.style.right = '8px';
+    } else {
+      siteNav.style.position = '';
+      siteNav.style.top = '';
+      siteNav.style.left = '';
+      siteNav.style.right = '';
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  // вызовы и обработчики для корректной работы навигации
+  updateNavTop();
+  window.addEventListener('resize', updateNavTop);
+  window.addEventListener('orientationchange', updateNavTop);
+  window.addEventListener('scroll', () => {
+    // обновляем только если header меняет положение (для устройств с toolbars)
+    updateNavTop();
+  });
+
   if(navToggle && siteNav){
     navToggle.addEventListener('click', (e)=>{
       e.stopPropagation();
       siteNav.classList.toggle('open');
-      // toggle aria-expanded for accessibility
       const expanded = siteNav.classList.contains('open');
       navToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      // при открытии — подстраиваем верх меню (на случай, если header изменил размер)
+      updateNavTop();
     });
-    // close on outside click
+
+    // закрытие при клике вне меню
     document.addEventListener('click', (e)=>{
       if(window.innerWidth <= 720){
         if(!siteNav.contains(e.target) && !navToggle.contains(e.target)){
@@ -35,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       }
     });
-    // close on escape
+
+    // Escape закрывает меню
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){
         siteNav.classList.remove('open');
@@ -44,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  // Export visible page to PDF (approximate resume) - uses html2pdf (external lib)
+  // Export/PDF button handling (если у тебя есть кнопка с id="downloadResume")
   const downloadBtn = document.getElementById('downloadResume');
   if(downloadBtn){
     downloadBtn.addEventListener('click', ()=>{
@@ -59,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function(){
       if(typeof html2pdf === 'function' || (window.html2pdf)){
         html2pdf().set(opt).from(element).save();
       } else {
-        // fallback: just open print dialog
         window.print();
       }
     });
